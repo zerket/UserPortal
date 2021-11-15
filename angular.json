@@ -1,0 +1,1091 @@
+{
+    "version": 1,
+    "cli": {
+        "defaultCollection": "@nrwl/angular"
+    },
+    "defaultProject": "wms-core",
+    "schematics": {
+        "@nrwl/angular:application": {
+            "style": "less",
+            "linter": "eslint",
+            "unitTestRunner": "karma",
+            "e2eTestRunner": "cypress",
+            "strict": true
+        },
+        "@nrwl/angular:library": {
+            "style": "less",
+            "linter": "eslint",
+            "unitTestRunner": "karma"
+        },
+        "@nrwl/angular:component": {
+            "style": "less"
+        },
+        "@nrwl/react": {
+            "application": {
+                "babel": true
+            }
+        }
+    },
+    "projects": {
+        "account-management": {
+            "projectType": "application",
+            "root": "apps/account-management",
+            "sourceRoot": "apps/account-management/src",
+            "prefix": "wms-core",
+            "i18n": {
+                "sourceLocale": "nl-NL",
+                "locales": {
+                    "nl": "apps/account-management/src/i18n/messages.nl.xlf",
+                    "en": "apps/account-management/src/i18n/messages.en.xlf",
+                    "ru": "apps/account-management/src/i18n/messages.ru.xlf"
+                }
+            },
+            "architect": {
+                "build": {
+                    "builder": "ngx-build-plus:browser",
+                    "options": {
+                        "outputPath": "dist/apps/account-management",
+                        "index": "apps/account-management/src/index.html",
+                        "main": "apps/account-management/src/main.ts",
+                        "polyfills": "apps/account-management/src/polyfills.ts",
+                        "tsConfig": "apps/account-management/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "apps/account-management/src/favicon.ico",
+                            "apps/account-management/src/assets"
+                        ],
+                        "styles": [
+                            "apps/account-management/src/styles.less"
+                        ],
+                        "scripts": [],
+                        "extraWebpackConfig": "apps/account-management/webpack.config.js",
+                        "i18nMissingTranslation": "warning",
+                        "localize": [
+                            "nl",
+                            "en",
+                            "ru"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/account-management/src/environments/environment.ts",
+                                    "with": "apps/account-management/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ],
+                            "extraWebpackConfig": "apps/account-management/webpack.prod.config.js"
+                        },
+                        "nl": {
+                            "localize": [
+                                "nl"
+                            ]
+                        },
+                        "en": {
+                            "localize": [
+                                "en"
+                            ]
+                        },
+                        "ru": {
+                            "localize": [
+                                "ru"
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "ngx-build-plus:dev-server",
+                    "options": {
+                        "browserTarget": "account-management:build:nl",
+                        "extraWebpackConfig": "apps/account-management/webpack.config.js",
+                        "port": 3222
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "account-management:build:production",
+                            "extraWebpackConfig": "apps/account-management/webpack.prod.config.js"
+                        },
+                        "en": {
+                            "browserTarget": "account-management:build:en"
+                        },
+                        "ru": {
+                            "browserTarget": "account-management:build:ru"
+                        }
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            "nx build account-management --prod",
+                            "docker build --build-arg app_name=account-management --build-arg config=nginx.service.conf -t account-management .",
+                            "docker rm --force account-management",
+                            "docker run --name account-management -d -p 3222:80 account-management"
+                        ],
+                        "parallel": false
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "account-management:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/account-management/src/**/*.ts",
+                            "apps/account-management/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "ngx-build-plus:karma",
+                    "options": {
+                        "main": "apps/account-management/src/test.ts",
+                        "tsConfig": "apps/account-management/tsconfig.spec.json",
+                        "karmaConfig": "apps/account-management/karma.conf.js",
+                        "polyfills": "apps/account-management/src/polyfills.ts",
+                        "styles": [],
+                        "scripts": [],
+                        "assets": [],
+                        "extraWebpackConfig": "apps/account-management/webpack.config.js"
+                    }
+                }
+            }
+        },
+        "auth": {
+            "projectType": "library",
+            "root": "libs/auth",
+            "sourceRoot": "libs/auth/src",
+            "prefix": "wms-core",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "options": {
+                        "tsConfig": "libs/auth/tsconfig.lib.json",
+                        "project": "libs/auth/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/auth/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/auth/src/**/*.ts",
+                            "libs/auth/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/auth/src/test.ts",
+                        "tsConfig": "libs/auth/tsconfig.spec.json",
+                        "karmaConfig": "libs/auth/karma.conf.js"
+                    }
+                }
+            }
+        },
+        "core": {
+            "projectType": "application",
+            "root": "apps/core",
+            "sourceRoot": "apps/core/src",
+            "prefix": "core",
+            "i18n": {
+                "sourceLocale": "nl-NL",
+                "locales": {
+                    "nl": "apps/core/src/i18n/messages.nl.xlf",
+                    "en": "apps/core/src/i18n/messages.en.xlf",
+                    "ru": "apps/core/src/i18n/messages.ru.xlf"
+                }
+            },
+            "architect": {
+                "build": {
+                    "builder": "ngx-build-plus:browser",
+                    "options": {
+                        "outputPath": "dist/apps/core",
+                        "index": "apps/core/src/index.html",
+                        "main": "apps/core/src/main.ts",
+                        "polyfills": "apps/core/src/polyfills.ts",
+                        "tsConfig": "apps/core/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "apps/core/src/favicon.ico",
+                            "apps/core/src/assets"
+                        ],
+                        "styles": [
+                            "apps/core/src/styles.less",
+                            "apps/core/src/styles/main.scss",
+                            "libs/styles/styles/themes/theme.scss"
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "apps/core/src/styles"
+                            ]
+                        },
+                        "scripts": [],
+                        "extraWebpackConfig": "apps/core/webpack.config.js",
+                        "i18nMissingTranslation": "warning",
+                        "localize": [
+                            "nl",
+                            "en",
+                            "ru"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/core/src/environments/environment.ts",
+                                    "with": "apps/core/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "500kb",
+                                    "maximumError": "2mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "2kb",
+                                    "maximumError": "4kb"
+                                }
+                            ],
+                            "extraWebpackConfig": "apps/core/webpack.prod.config.js"
+                        },
+                        "nl": {
+                            "localize": [
+                                "nl"
+                            ]
+                        },
+                        "en": {
+                            "localize": [
+                                "en"
+                            ]
+                        },
+                        "ru": {
+                            "localize": [
+                                "ru"
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "ngx-build-plus:dev-server",
+                    "options": {
+                        "browserTarget": "core:build:nl",
+                        "extraWebpackConfig": "apps/core/webpack.config.js",
+                        "port": 3000
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "core:build:production",
+                            "extraWebpackConfig": "apps/core/webpack.prod.config.js"
+                        },
+                        "en": {
+                            "browserTarget": "core:build:en"
+                        },
+                        "ru": {
+                            "browserTarget": "core:build:ru"
+                        }
+                    }
+                },
+                "serve-with-services": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            "nx serve core",
+                            "nx serve service-overview",
+                            "nx serve account-management"
+                        ],
+                        "parallel": true
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            "nx build core",
+                            "docker build --build-arg app_name=core --build-arg config=nginx.core.conf -t core .",
+                            "docker rm --force core",
+                            "docker run --name core -d -p 80:80 core"
+                        ],
+                        "parallel": false
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "core:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/core/src/**/*.ts",
+                            "apps/core/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "ngx-build-plus:karma",
+                    "options": {
+                        "main": "apps/core/src/test.ts",
+                        "tsConfig": "apps/core/tsconfig.spec.json",
+                        "karmaConfig": "apps/core/karma.conf.js",
+                        "polyfills": "apps/core/src/polyfills.ts",
+                        "styles": [],
+                        "scripts": [],
+                        "assets": [],
+                        "extraWebpackConfig": "apps/core/webpack.config.js"
+                    }
+                }
+            }
+        },
+        "medication": {
+            "projectType": "application",
+            "root": "apps/medication",
+            "sourceRoot": "apps/medication/src",
+            "prefix": "wms-core",
+            "architect": {
+                "build": {
+                    "builder": "ngx-build-plus:browser",
+                    "options": {
+                        "outputPath": "dist/apps/medication",
+                        "index": "apps/medication/src/index.html",
+                        "main": "apps/medication/src/main.ts",
+                        "polyfills": "apps/medication/src/polyfills.ts",
+                        "tsConfig": "apps/medication/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "apps/medication/src/favicon.ico",
+                            "apps/medication/src/assets"
+                        ],
+                        "styles": [
+                            "apps/medication/src/styles.less"
+                        ],
+                        "scripts": [],
+                        "extraWebpackConfig": "apps/medication/webpack.config.js"
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/medication/src/environments/environment.ts",
+                                    "with": "apps/medication/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ],
+                            "extraWebpackConfig": "apps/medication/webpack.prod.config.js"
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "ngx-build-plus:dev-server",
+                    "options": {
+                        "browserTarget": "medication:build",
+                        "extraWebpackConfig": "apps/medication/webpack.config.js",
+                        "port": 3120
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "medication:build:production",
+                            "extraWebpackConfig": "apps/medication/webpack.prod.config.js"
+                        }
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            "nx build medication --prod",
+                            "docker build --build-arg app_name=medication --build-arg config=nginx.service.conf -t medication .",
+                            "docker rm --force medication",
+                            "docker run --name medication -d -p 3120:80 medication"
+                        ],
+                        "parallel": false
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "medication:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/medication/src/**/*.ts",
+                            "apps/medication/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "ngx-build-plus:karma",
+                    "options": {
+                        "main": "apps/medication/src/test.ts",
+                        "tsConfig": "apps/medication/tsconfig.spec.json",
+                        "karmaConfig": "apps/medication/karma.conf.js",
+                        "polyfills": "apps/medication/src/polyfills.ts",
+                        "styles": [],
+                        "scripts": [],
+                        "assets": [],
+                        "extraWebpackConfig": "apps/medication/webpack.config.js"
+                    }
+                }
+            }
+        },
+        "message-center": {
+            "projectType": "application",
+            "root": "apps/message-center",
+            "sourceRoot": "apps/message-center/src",
+            "prefix": "wms-core",
+            "architect": {
+                "build": {
+                    "builder": "ngx-build-plus:browser",
+                    "options": {
+                        "outputPath": "dist/apps/message-center",
+                        "index": "apps/message-center/src/index.html",
+                        "main": "apps/message-center/src/main.ts",
+                        "polyfills": "apps/message-center/src/polyfills.ts",
+                        "tsConfig": "apps/message-center/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "apps/message-center/src/favicon.ico",
+                            "apps/message-center/src/assets"
+                        ],
+                        "styles": [
+                            "apps/message-center/src/styles.less"
+                        ],
+                        "scripts": [],
+                        "extraWebpackConfig": "apps/message-center/webpack.config.js"
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/message-center/src/environments/environment.ts",
+                                    "with": "apps/message-center/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ],
+                            "extraWebpackConfig": "apps/message-center/webpack.prod.config.js"
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "ngx-build-plus:dev-server",
+                    "options": {
+                        "browserTarget": "message-center:build",
+                        "extraWebpackConfig": "apps/message-center/webpack.config.js",
+                        "port": 3310
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "message-center:build:production",
+                            "extraWebpackConfig": "apps/message-center/webpack.prod.config.js"
+                        }
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            "nx build message-center --prod",
+                            "docker build --build-arg app_name=message-center --build-arg config=nginx.service.conf -t message-center .",
+                            "docker rm --force message-center",
+                            "docker run --name message-center -d -p 3310:80 message-center"
+                        ],
+                        "parallel": false
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "message-center:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/message-center/src/**/*.ts",
+                            "apps/message-center/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "ngx-build-plus:karma",
+                    "options": {
+                        "main": "apps/message-center/src/test.ts",
+                        "tsConfig": "apps/message-center/tsconfig.spec.json",
+                        "karmaConfig": "apps/message-center/karma.conf.js",
+                        "polyfills": "apps/message-center/src/polyfills.ts",
+                        "styles": [],
+                        "scripts": [],
+                        "assets": [],
+                        "extraWebpackConfig": "apps/message-center/webpack.config.js"
+                    }
+                }
+            }
+        },
+        "service-overview": {
+            "projectType": "application",
+            "root": "apps/service-overview",
+            "sourceRoot": "apps/service-overview/src",
+            "prefix": "wms-core",
+            "architect": {
+                "build": {
+                    "builder": "ngx-build-plus:browser",
+                    "options": {
+                        "outputPath": "dist/apps/service-overview",
+                        "index": "apps/service-overview/src/index.html",
+                        "main": "apps/service-overview/src/main.ts",
+                        "polyfills": "apps/service-overview/src/polyfills.ts",
+                        "tsConfig": "apps/service-overview/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "apps/service-overview/src/favicon.ico",
+                            "apps/service-overview/src/assets"
+                        ],
+                        "styles": [
+                            "apps/service-overview/src/styles.less"
+                        ],
+                        "scripts": [],
+                        "extraWebpackConfig": "apps/service-overview/webpack.config.js"
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/service-overview/src/environments/environment.ts",
+                                    "with": "apps/service-overview/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ],
+                            "extraWebpackConfig": "apps/service-overview/webpack.prod.config.js"
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "ngx-build-plus:dev-server",
+                    "options": {
+                        "browserTarget": "service-overview:build",
+                        "extraWebpackConfig": "apps/service-overview/webpack.config.js",
+                        "port": 3110
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "service-overview:build:production",
+                            "extraWebpackConfig": "apps/service-overview/webpack.prod.config.js"
+                        }
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            "nx build service-overview --prod",
+                            "docker build --build-arg app_name=service-overview --build-arg config=nginx.service.conf -t service-overview .",
+                            "docker rm --force service-overview",
+                            "docker run --name service-overview -d -p 3110:80 service-overview"
+                        ],
+                        "parallel": false
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "service-overview:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/service-overview/src/**/*.ts",
+                            "apps/service-overview/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "ngx-build-plus:karma",
+                    "options": {
+                        "main": "apps/service-overview/src/test.ts",
+                        "tsConfig": "apps/service-overview/tsconfig.spec.json",
+                        "karmaConfig": "apps/service-overview/karma.conf.js",
+                        "polyfills": "apps/service-overview/src/polyfills.ts",
+                        "styles": [],
+                        "scripts": [],
+                        "assets": [],
+                        "extraWebpackConfig": "apps/service-overview/webpack.config.js"
+                    }
+                }
+            }
+        },
+        "skin-vision": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "less"
+                },
+                "@schematics/angular:application": {
+                    "strict": true
+                }
+            },
+            "root": "apps/skin-vision",
+            "sourceRoot": "apps/skin-vision/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "ngx-build-plus:browser",
+                    "options": {
+                        "outputPath": "dist/apps/skin-vision",
+                        "index": "apps/skin-vision/src/index.html",
+                        "main": "apps/skin-vision/src/main.ts",
+                        "polyfills": "apps/skin-vision/src/polyfills.ts",
+                        "tsConfig": "apps/skin-vision/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "apps/skin-vision/src/favicon.ico",
+                            "apps/skin-vision/src/assets"
+                        ],
+                        "styles": [
+                            "apps/skin-vision/src/styles.less"
+                        ],
+                        "scripts": [],
+                        "extraWebpackConfig": "apps/skin-vision/webpack.config.js"
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/skin-vision/src/environments/environment.ts",
+                                    "with": "apps/skin-vision/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "500kb",
+                                    "maximumError": "1mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "2kb",
+                                    "maximumError": "4kb"
+                                }
+                            ],
+                            "extraWebpackConfig": "apps/skin-vision/webpack.prod.config.js"
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "ngx-build-plus:dev-server",
+                    "options": {
+                        "browserTarget": "skin-vision:build",
+                        "extraWebpackConfig": "apps/skin-vision/webpack.config.js",
+                        "port": 3001
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "skin-vision:build:production",
+                            "extraWebpackConfig": "apps/skin-vision/webpack.prod.config.js"
+                        }
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            "nx build skin-vision --prod",
+                            "docker build --build-arg app_name=skin-vision --build-arg config=nginx.service.conf -t skin-vision .",
+                            "docker rm --force skin-vision",
+                            "docker run --name skin-vision -d -p 3001:80 skin-vision"
+                        ],
+                        "parallel": false
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "skin-vision:build"
+                    }
+                },
+                "test": {
+                    "builder": "ngx-build-plus:karma",
+                    "options": {
+                        "main": "apps/skin-vision/src/test.ts",
+                        "polyfills": "apps/skin-vision/src/polyfills.ts",
+                        "tsConfig": "apps/skin-vision/tsconfig.spec.json",
+                        "karmaConfig": "apps/skin-vision/karma.conf.js",
+                        "assets": [
+                            "apps/skin-vision/src/favicon.ico",
+                            "apps/skin-vision/src/assets"
+                        ],
+                        "styles": [
+                            "apps/skin-vision/src/styles.less"
+                        ],
+                        "scripts": [],
+                        "extraWebpackConfig": "apps/skin-vision/webpack.config.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/skin-vision/tsconfig.app.json",
+                            "apps/skin-vision/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "e2e/protractor.conf.js",
+                        "devServerTarget": "skin-vision:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "skin-vision:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+        "shared-data-access-patient-data": {
+            "projectType": "library",
+            "root": "libs/shared/data-access/patient-data",
+            "sourceRoot": "libs/shared/data-access/patient-data/src",
+            "prefix": "wms-core",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/shared/data-access/patient-data/src/**/*.ts",
+                            "libs/shared/data-access/patient-data/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/shared/data-access/patient-data/src/test.ts",
+                        "tsConfig": "libs/shared/data-access/patient-data/tsconfig.spec.json",
+                        "karmaConfig": "libs/shared/data-access/patient-data/karma.conf.js"
+                    }
+                }
+            }
+        },
+        "shared-utility": {
+            "projectType": "library",
+            "root": "libs/shared/utility",
+            "sourceRoot": "libs/shared/utility/src",
+            "prefix": "wmsCore",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/shared/utility/src/**/*.ts",
+                            "libs/shared/utility/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/shared/utility/src/test.ts",
+                        "tsConfig": "libs/shared/utility/tsconfig.spec.json",
+                        "karmaConfig": "libs/shared/utility/karma.conf.js"
+                    }
+                }
+            }
+        },
+        "styles": {
+            "projectType": "library",
+            "root": "libs/styles",
+            "sourceRoot": "libs/styles/src",
+            "prefix": "wms-core",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "options": {
+                        "tsConfig": "libs/styles/tsconfig.lib.json",
+                        "project": "libs/styles/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/styles/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/styles/src/**/*.ts",
+                            "libs/styles/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/styles/src/test.ts",
+                        "tsConfig": "libs/styles/tsconfig.spec.json",
+                        "karmaConfig": "libs/styles/karma.conf.js"
+                    }
+                }
+            }
+        },
+        "ui": {
+            "projectType": "library",
+            "root": "libs/ui",
+            "sourceRoot": "libs/ui/src",
+            "prefix": "ui",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "options": {
+                        "tsConfig": "libs/ui/tsconfig.lib.json",
+                        "project": "libs/ui/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/ui/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/ui/src/**/*.ts",
+                            "libs/ui/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/ui/src/test.ts",
+                        "tsConfig": "libs/ui/tsconfig.spec.json",
+                        "karmaConfig": "libs/ui/karma.conf.js"
+                    }
+                }
+            }
+        },
+        "shared": {
+            "projectType": "library",
+            "root": "libs/shared",
+            "sourceRoot": "libs/shared/src",
+            "prefix": "wms-core",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "options": {
+                        "tsConfig": "libs/shared/tsconfig.lib.json",
+                        "project": "libs/shared/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/shared/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/shared/src/**/*.ts",
+                            "libs/shared/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/shared/src/test.ts",
+                        "tsConfig": "libs/shared/tsconfig.spec.json",
+                        "karmaConfig": "libs/shared/karma.conf.js"
+                    }
+                }
+            }
+    },
+        "ui-material": {
+      "projectType": "library",
+      "root": "libs/ui/material",
+      "sourceRoot": "libs/ui/material/src",
+      "prefix": "wms-core",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/ui/material/tsconfig.lib.json",
+            "project": "libs/ui/material/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ui/material/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/material/src/**/*.ts",
+              "libs/ui/material/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/ui/material/src/test.ts",
+            "tsConfig": "libs/ui/material/tsconfig.spec.json",
+            "karmaConfig": "libs/ui/material/karma.conf.js"
+          }
+        }
+      }
+    },
+    "profile": {
+      "projectType": "library",
+      "root": "libs/profile",
+      "sourceRoot": "libs/profile/src",
+      "prefix": "uzo",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/profile/tsconfig.lib.json",
+            "project": "libs/profile/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/profile/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/profile/src/**/*.ts",
+              "libs/profile/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/profile/src/test.ts",
+            "tsConfig": "libs/profile/tsconfig.spec.json",
+            "karmaConfig": "libs/profile/karma.conf.js"
+          }
+        }
+      }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+@import '../palettes/primary.scss';
+@import '../palettes/darkest-blue.scss';
+@import '../palettes/light-blue.scss';
+@import '../palettes/accent.scss';
+
+@include mat-core();
+
+$uzo-accent: mat-palette($uzo-accent);
+$uzo-primary: mat-palette($uzo-primary);
+$uzo-dark: mat-palette($uzo-darkest-blue);
+
+$uzo-theme-primary: mat-light-theme($uzo-primary, $uzo-accent);
+$uzo-theme-dark: mat-dark-theme($uzo-dark, $uzo-accent);
+
+.theme-primary {
+  @include angular-material-theme($uzo-theme-primary);
+}
+
+.theme-dark {
+  @include angular-material-theme($uzo-theme-dark);
+}

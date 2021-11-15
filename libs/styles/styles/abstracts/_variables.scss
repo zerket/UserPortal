@@ -1,0 +1,31 @@
+$uzo-font-family: "open sans", HelveticaNeue, "Helvetica Neue", Helvetica-Neue, Helvetica, Arial, sans-serif !default;
+$uzo-font-color-high: rgba(0, 0, 0, 0.87) !default; // this is the default color
+$uzo-font-color-medium: rgba(0, 0, 0, 0.6) !default;
+$uzo-font-color-disabled: rgba(0, 0, 0, 0.38) !default;
+$uzo-font-weight-light: 300 !default;
+$uzo-font-weight-normal: 400 !default;
+$uzo-font-weight-semi-bold: 600 !default;
+$uzo-font-weight-bold: bold !default;
+
+$uzo-color-white: #ffffff !default;
+$uzo-color-off-white: #fafafa !default;
+$uzo-color-black: #000000 !default;
+$uzo-color-primary: #4a90e2 !default;
+$uzo-color-primary-disabled: #98c7f1 !default;
+$uzo-color-primary-hovered: #50a0ff !default;
+$uzo-color-primary-active: #3a73b6 !default;
+$uzo-color-light-grey: rgba(0, 0, 0, 0.08) !default;
+$uzo-color-grey: rgba(0, 0, 0, 0.12) !default;
+$uzo-color-hovered: $uzo-color-light-grey !default;
+$uzo-color-success: #00bfa5 !default;
+$uzo-color-warning: #ffc400 !default;
+$uzo-color-error: #ef3340 !default;
+$uzo-border-color: $uzo-color-grey !default;
+$uzo-background-color-disabled: #eeeeee !default;
+$uzo-color-highlight: #faffa8 !default;
+$uzo-color-primary-background-light: #e4f1fc !default;
+$uzo-gray-5-color: #e8e8e8 !default;
+$uzo-color-bg-form: #f7f9fb !default;
+
+$uzo-icon-size-basis: 24px !default;
+$uzo-icon-size-large: 48px !default;

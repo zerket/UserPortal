@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+    margin: 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.j-c-space-between {
+    justify-content: space-between;
+}
+
+.avatar {
+    border-radius: 50px;
+}
+
+.gp-details {
+    width: 200px;
+    height: 300px;
+    background: blue;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+@max-value: 100;
+.width-loop (@i) when (@i >= 0) {
+    .w-@{i} {
+        width: ~"@{i}px";
+    }
+    .width-loop(@i - 10);
+}
+
+.width-loop (@max-value);
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////

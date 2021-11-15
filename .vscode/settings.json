@@ -1,0 +1,7 @@
+{
+    "compile-hero.disable-compile-files-on-did-save-code": false,
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "i18n-ally.localesPaths": [
+        "apps/core/src/i18n"
+    ]
+}

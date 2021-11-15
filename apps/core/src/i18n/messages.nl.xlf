@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="nl-NL" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1231925575849908204" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{platform}}"/> body works!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/ui/layout/_elements/body/body.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <note priority="1" from="description"> Platform description</note>
+        <note priority="1" from="meaning">Platform description </note>
+      </trans-unit>
+      <trans-unit id="3450225114562031427" datatype="html">
+        <source> Privacy | Voorwaarden </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/ui/layout/_elements/footer/footer.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <note priority="1" from="description"> Privacy</note>
+        <note priority="1" from="meaning">Privacy </note>
+      </trans-unit>
+      <trans-unit id="5293115975769070135" datatype="html">
+        <source>Hulp</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/ui/layout/_elements/header/header.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description"> Support call</note>
+        <note priority="1" from="meaning">Help </note>
+      </trans-unit>
+      <trans-unit id="6697065095177654411" datatype="html">
+        <source>Toegankelijkheid</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/ui/layout/_elements/header/header.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description"> Accessibility</note>
+        <note priority="1" from="meaning">a11y </note>
+      </trans-unit>
+      <trans-unit id="4501422497264094608" datatype="html">
+        <source>Patientomgeving</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/ui/layout/_elements/header/header.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description"> Patient portal</note>
+        <note priority="1" from="meaning">Patient portal </note>
+      </trans-unit>
+      <trans-unit id="893443186824134770" datatype="html">
+        <source>Account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/ui/layout/_elements/header/header.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description"> Edit profile info</note>
+        <note priority="1" from="meaning">Account </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,18 @@
+<div class="flex service-overview-block">
+    <div class="gp-details">
+        <ui-widget-proxy [widget]="gpDetails"
+                          fxLayout="column"
+                          fxLayoutAlign="center center"></ui-widget-proxy>
+    </div>
+    <div class="widgets">
+        <div *ngFor="let item of widgets"
+             class="block widgets"
+             fxLayout="column"
+             fxLayoutAlign="space-between center">
+            <ui-widget-proxy [widget]="item"
+                              routerLink="./{{item.routePath}}"
+                              fxLayout="column"
+                              fxLayoutAlign="center center"></ui-widget-proxy>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="nl-NL" target-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5191116308961148109" datatype="html">
+        <source>Some HIS name</source>
+        <target>Сама хиса нама на англицком</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/patient-gp-details/patient-gp-details.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description">HIS name</note>
+      </trans-unit>
+      <trans-unit id="484284730927746380" datatype="html">
+        <source>Adres</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/patient-gp-details/patient-gp-details.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">Address</note>
+      </trans-unit>
+      <trans-unit id="3254262725661837070" datatype="html">
+        <source>Paasheuvelweg 25 </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/patient-gp-details/patient-gp-details.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Street</note>
+      </trans-unit>
+      <trans-unit id="1851561741921578442" datatype="html">
+        <source>1105BP Amsterdam</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/patient-gp-details/patient-gp-details.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">House</note>
+      </trans-unit>
+      <trans-unit id="6114976750145007862" datatype="html">
+        <source>Telefoonnummer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/patient-gp-details/patient-gp-details.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">Phone number</note>
+      </trans-unit>
+      <trans-unit id="7841135232837675050" datatype="html">
+        <source>0206500100</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/patient-gp-details/patient-gp-details.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6152538277939375662" datatype="html">
+        <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a id=&quot;linkWebSiteUrl&quot;
+                   href=&quot;http://&quot;
+                   title=&quot;Ga naar http://&quot;
+                   target=&quot;_blank&quot;
+                   class=&quot;backLink&quot;&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Naar website<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/patient-gp-details/patient-gp-details.component.html</context>
+          <context context-type="linenumber">15,19</context>
+        </context-group>
+        <note priority="1" from="description">HIS url</note>
+      </trans-unit>
+      <trans-unit id="8295307499209125996" datatype="html">
+        <source>Account Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/user-details-topbar/user-details-topbar.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">Account Name</note>
+      </trans-unit>
+      <trans-unit id="5606670937609956145" datatype="html">
+        <source>Loading patient data...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/account-management/src/app/user-details-topbar/user-details-topbar.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description">Loading</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

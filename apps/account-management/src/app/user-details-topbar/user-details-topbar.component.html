@@ -1,0 +1,12 @@
+<div *ngIf="patient | async as patient; else loading" class="flex">
+    <div *ngIf="patient && patient.name">
+        <span>{{patient.name.first}} {{patient.name.last}}</span>
+    </div>
+    <div *ngIf="patient && patient.name">
+        <img src="{{patient.picture.thumbnail}}" alt="" class="avatar">
+    </div>
+</div>
+
+<ng-template #loading>
+    <p i18n="Loading">Loading patient data...</p>
+</ng-template>

@@ -1,0 +1,54 @@
+{
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "npmScope": "wms-core",
+  "projects": {
+    "shared-utility": {
+      "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "auth": {
+      "tags": []
+    },
+    "skin-vision": {
+      "tags": []
+    },
+    "medication": {
+      "tags": []
+    },
+    "message-center": {
+      "tags": []
+    },
+    "account-management": {
+      "tags": []
+    },
+    "service-overview": {
+      "tags": []
+    },
+    "shared-data-access-patient-data": {
+      "tags": []
+    },
+    "styles": {
+      "tags": []
+    },
+    "ui": {
+      "tags": []
+    },
+    "shared": {
+      "tags": []
+    },
+    "ui-material": {
+      "tags": ["material"]
+    },
+    "profile": {
+      "tags": ["profile"]
+    }
+  }
+}

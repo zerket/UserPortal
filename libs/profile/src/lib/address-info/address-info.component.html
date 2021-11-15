@@ -1,0 +1,61 @@
+<mat-card class="m-t-b-20">
+    <mat-card-title>Adresgegevens</mat-card-title>
+    <mat-card-content>
+        <form fxLayout="column"
+              fxLayoutAlign="center none">
+            <div>
+                <mat-form-field appearance="fill" class="m-5">
+                    <mat-label>Land</mat-label>
+                    <select matNativeControl
+                            required>
+                        <option value="saab">Nederland</option>
+                        <option value="mercedes">Duitsland</option>
+                        <option value="audi">België</option>
+                        <option value="audi">Luxemburg</option>
+                    </select>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Straat"
+                           value="{{patient.location.street.name}}"
+                           type="text"
+                           #username>
+                </mat-form-field>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Huisnummer"
+                           value="{{patient.location.street.number}}"
+                           type="text"
+                           #password>
+                </mat-form-field>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Toevoeging"
+                           type="text"
+                           #password>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Postcode"
+                           value="{{patient.location.postcode}}"
+                           type="text"
+                           #password>
+                </mat-form-field>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Woonplaats"
+                           value="{{patient.location.city}}"
+                           type="text"
+                           #password>
+                </mat-form-field>
+            </div>
+        </form>
+        <button mat-raised-button color="primary">Opslaan</button>
+    </mat-card-content>
+</mat-card>

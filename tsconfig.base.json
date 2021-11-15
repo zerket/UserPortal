@@ -1,0 +1,39 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/wms-core",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "lib": ["es2018", "dom"],
+    "rootDir": ".",
+    "paths": {
+      "@uzo/styles": ["libs/styles/src/index.ts"],
+      "@uzo/ui": ["libs/ui/src/index.ts"],
+      "@uzo/ui/*": ["libs/ui/*"],
+      "@uzo/shared": ["libs/shared/src/index.ts"],
+      "@uzo/shared/*": ["libs/shared/*"],
+      "@uzo/ui/material": ["libs/ui/material/src/index.ts"],
+      "@uzo/profile": ["libs/profile/src/index.ts"],
+      "@uzo/account": ["libs/account/data-access/src/index.ts"],
+      "@uzo/auth": ["libs/auth/src/index.ts"],
+      "@uzo/auth/*": ["libs/auth/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

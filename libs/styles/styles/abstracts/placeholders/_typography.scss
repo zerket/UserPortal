@@ -1,0 +1,24 @@
+%uzo-h1 {
+  @include typography(to-rem(40px), 60px);
+  font-weight: normal;
+}
+
+%uzo-h2 {
+  @include typography(to-rem(32px), 48px);
+  font-weight: normal;
+}
+
+%uzo-h3 {
+  @include typography(to-rem(24px), 36px);
+  font-weight: normal;
+}
+
+%uzo-h4 {
+  @include typography(to-rem(20px), 30px);
+  font-weight: $uzo-font-weight-semi-bold;
+}
+
+%uzo-h5 {
+  @include typography(to-rem(16px), 24px);
+  font-weight: $uzo-font-weight-semi-bold;
+}

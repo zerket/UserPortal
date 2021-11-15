@@ -1,0 +1,8 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/libs/styles",
+  "assets": ["./styles"],
+  "lib": {
+    "entryFile": "src/index.ts"
+  }
+}

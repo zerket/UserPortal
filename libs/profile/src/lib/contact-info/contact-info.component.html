@@ -1,0 +1,40 @@
+<mat-card class="m-t-b-20">
+    <mat-card-title>Contactgegevens</mat-card-title>
+    <mat-card-content>
+        <form fxLayout="column"
+              fxLayoutAlign="center none">
+            <div>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="E-mailadres"
+                           value="{{patient.email}}"
+                           type="text"
+                           #username>
+                </mat-form-field>
+
+            </div>
+
+            <div>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Mobiel nummer"
+                           value="{{patient.phone}}"
+                           type="text"
+                           #password>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Telefoonnummer"
+                           value="{{patient.phone}}"
+                           type="text"
+                           #password>
+                </mat-form-field>
+            </div>
+        </form>
+        <button mat-raised-button
+                color="primary">Opslaan</button>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <div>
+            <button mat-raised-button
+                    color="primary"
+                    (click)="onSetTheme('theme-primary')">Primary</button>
+            <button mat-raised-button
+                    color="primary"
+                    (click)="onSetTheme('theme-dark')">Dark</button>
+        </div>
+        <div>
+            <div>
+                <i></i>
+                <span i18n="Help | Support call">Hulp</span>
+            </div>
+            <div>
+                <i></i>
+                <span i18n="a11y | Accessibility">Toegankelijkheid</span>
+            </div>
+        </div>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+        <div>
+            <span i18n="Patient portal | Patient portal">Patientomgeving</span>
+        </div>
+        <div>
+
+        </div>
+    </mat-toolbar-row>
+            <ui-widget-proxy [widget]="userDetailsWidget"
+                             fxLayout="row"
+                             fxLayoutAlign="space-around center"
+                             [routerLink]="['/profile']"
+                             routerLinkActive="router-link-active"></ui-widget-proxy></mat-toolbar>

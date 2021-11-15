@@ -1,0 +1,29 @@
+# > docker-compose up
+
+version: '3.8'
+services:
+  # core:
+  #   image: core
+  #   ports:
+  #     - '442:443'
+  #     - '81:80'
+  skin-vision:
+    image: skin-vision
+    ports:
+      - '3001:80'
+  service-overview:
+    image: service-overview
+    ports:
+      - '3110:80'
+  account-management:
+    image: account-management
+    ports:
+      - '3222:80'
+  message-center:
+    image: message-center
+    ports:
+      - '3310:80'
+  medication:
+    image: medication
+    ports:
+      - '3120:80'

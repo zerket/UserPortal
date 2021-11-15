@@ -1,0 +1,8 @@
+<mat-spinner class="center"
+             *ngIf="loading"></mat-spinner>
+
+<iframe id="iframe"
+        class="frame"
+        (load)="onLoaded()"
+        [src]="src | safe"
+        wmsCoreNavigationHandler></iframe>

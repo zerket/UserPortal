@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+@import '';
+
+@include mat-core();
+
+$uzo-primary: mat-palette('#123f93');
+$uzo-light: mat-palette('#00AEEF');
+$uzo-dark: mat-palette('#071838');
+
+
+
+$uzo-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $uzo-primary,
+      light: $uzo-light,
+      dark: $uzo-dark,
+      hover: $uzo-hover,
+    ),
+  )
+);
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.core-theme($uzo-theme);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+@include mat.button-theme($uzo-theme);
+
+// Include the theme mixins for other components you use here.

@@ -1,0 +1,11 @@
+@mixin typography(
+  $font-size,
+  $line-height,
+  $color: $uzo-font-color-high,
+  $font-family: $uzo-font-family
+) {
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+  font-family: $font-family;
+}

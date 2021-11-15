@@ -1,0 +1,60 @@
+<mat-card class="m-t-b-20">
+    <mat-card-title>Persoonlijke gegevens</mat-card-title>
+    <mat-card-content>
+        <form fxLayout="column"
+              fxLayoutAlign="center none">
+            <div>
+                <mat-form-field appearance="fill" class="m-5">
+                    <mat-label>Geboortedatum</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate
+                               placeholder="Start date">
+                        <input matEndDate
+                               placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix
+                                           [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="m-5">
+                    <mat-label>Geslacht</mat-label>
+                    <select matNativeControl
+                            required>
+                        <option value="saab">Man</option>
+                        <option value="mercedes">Vrouw</option>
+                        <option value="audi">N.v.t</option>
+                    </select>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Voornaam"
+                           type="text"
+                           value="{{patient.name.first}}"
+                           #username>
+                </mat-form-field>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Tussenv."
+                           type="text"
+                           value="{{patient.name.title}}"
+                           #password>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="m-5">
+                    <input matInput
+                           placeholder="Achternaam"
+                           type="text"
+                           value="{{patient.name.last}}"
+                           #password>
+                </mat-form-field>
+            </div>
+        </form>
+        <button mat-raised-button color="primary">Opslaan</button>
+    </mat-card-content>
+</mat-card>
